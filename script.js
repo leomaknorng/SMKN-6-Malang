@@ -1,4 +1,4 @@
-    document.querySelectorAll('.navbar a').forEach(link => {
+document.querySelectorAll('.navbar a').forEach(link => {
     link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         if (href && href.startsWith('#')) {
@@ -158,3 +158,22 @@
         sessionStorage.setItem('welcomed', '1');
     }
     });
+
+    // Mengecilkan header dan isinya saat discroll ke bawah dengan transisi lebih mulus
+let lastScrollY = 0;
+let ticking = false;
+const header = document.querySelector('header');
+function handleHeaderShrink() {
+  if (window.scrollY > 50) {
+    header.classList.add('shrink');
+  } else {
+    header.classList.remove('shrink');
+  }
+  ticking = false;
+}
+window.addEventListener('scroll', function() {
+  if (!ticking) {
+    window.requestAnimationFrame(handleHeaderShrink);
+    ticking = true;
+  }
+});
